@@ -65,13 +65,22 @@
             <span class="file-view__size" id="fileSize">—</span>
           </div>
           <div class="file-view__actions">
+            <button class="btn btn--quaternary btn--sm" type="button" id="dumpFormat">Reformater</button>
             <button class="btn btn--quaternary btn--sm" type="button" id="dumpCopy">Copier hex</button>
-            <button class="btn btn--quaternary btn--sm" type="button" id="dumpDownload">Télécharger .hex</button>
+            <button class="btn btn--quaternary btn--sm" type="button" id="dumpDownload">Télécharger</button>
             <button class="btn btn--quaternary btn--sm" type="button" id="dumpClear">Vider</button>
           </div>
         </div>
 
-        <pre class="hex-dump" id="hexDump"></pre>
+        <textarea
+          class="hex-dump"
+          id="hexDump"
+          spellcheck="false"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          wrap="off"
+        ></textarea>
 
         <div class="file-view__pager" id="filePager" hidden>
           <button class="btn-link" type="button" id="pagerPrev">←</button>

@@ -151,6 +151,7 @@
   const pagerPrev = document.getElementById('pagerPrev');
   const pagerNext = document.getElementById('pagerNext');
   const pagerStatus = document.getElementById('pagerStatus');
+  const dumpFormatBtn = document.getElementById('dumpFormat');
   const dumpCopyBtn = document.getElementById('dumpCopy');
   const dumpDownloadBtn = document.getElementById('dumpDownload');
   const dumpClearBtn = document.getElementById('dumpClear');
@@ -195,7 +196,7 @@
     if (!loaded) return;
     const start = page * PAGE_SIZE;
     const end = Math.min(loaded.size, start + PAGE_SIZE);
-    hexDumpEl.textContent = renderSlice(loaded.bytes, start, PAGE_SIZE);
+    hexDumpEl.value = renderSlice(loaded.bytes, start, PAGE_SIZE);
 
     const total = Math.ceil(loaded.size / PAGE_SIZE);
     if (total > 1) {
@@ -208,6 +209,61 @@
       pagerEl.hidden = true;
     }
     hexDumpEl.scrollTop = 0;
+  }
+
+  /* Parse l'éditable : pour chaque ligne, saute l'offset (8 chars + 2 spaces),
+     prend la colonne hex (49 chars max), ignore l'ASCII. Extrait les paires
+     hex valides — tout reste robuste si l'utilisateur édite librement. */
+  function parseDumpText(text) {
+    const out = [];
+    const lines = text.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+      if (!line.trim()) continue;
+
+      /* Si la ligne commence par un offset (6+ chars hex puis 2 espaces),
+         on le skip. Sinon on parse depuis le début. */
+      if (/^[0-9a-fA-F]{6,8}\s{2}/.test(line)) {
+        line = line.slice(line.match(/^[0-9a-fA-F]{6,8}\s{2}/)[0].length);
+      }
+
+      /* La colonne hex fait au max 49 chars : 16 paires + 15 espaces + 1 supp. */
+      const hexCol = line.slice(0, 49);
+      const pairs = hexCol.match(/[0-9a-fA-F]{2}/g);
+      if (pairs) {
+        for (let j = 0; j < pairs.length; j++) out.push(parseInt(pairs[j], 16));
+      }
+    }
+    return new Uint8Array(out);
+  }
+
+  /* Reconstruit loaded.bytes en remplaçant la page courante par les
+     bytes parsés depuis le textarea. La page peut grandir ou rétrécir. */
+  function commitEdits() {
+    if (!loaded) return;
+    const start = page * PAGE_SIZE;
+    const oldEnd = Math.min(loaded.size, start + PAGE_SIZE);
+    const oldLen = oldEnd - start;
+    const parsed = parseDumpText(hexDumpEl.value);
+
+    /* Pas de changement → skip */
+    if (parsed.length === oldLen) {
+      let identical = true;
+      for (let i = 0; i < oldLen; i++) {
+        if (loaded.bytes[start + i] !== parsed[i]) { identical = false; break; }
+      }
+      if (identical) return;
+    }
+
+    const before = loaded.bytes.subarray(0, start);
+    const after = loaded.bytes.subarray(start + oldLen);
+    const merged = new Uint8Array(before.length + parsed.length + after.length);
+    merged.set(before, 0);
+    merged.set(parsed, before.length);
+    merged.set(after, before.length + parsed.length);
+    loaded.bytes = merged;
+    loaded.size = merged.length;
+    fileSizeEl.textContent = fmtSize(loaded.size) + ' · ' + loaded.size + ' octets · modifié';
   }
 
   function loadFile(file) {
@@ -268,16 +324,38 @@
     if (f) loadFile(f);
   });
 
+  /* Édition en direct : on commit (parse + splice) sur chaque input,
+     debouncé, pour garder loaded.bytes et la taille à jour SANS re-render
+     (sinon le curseur saute). Le formatage propre se fait via "Reformater". */
+  let commitTimer = null;
+  hexDumpEl.addEventListener('input', function () {
+    if (!loaded) return;
+    clearTimeout(commitTimer);
+    commitTimer = setTimeout(commitEdits, 200);
+  });
+  hexDumpEl.addEventListener('blur', function () {
+    clearTimeout(commitTimer);
+    commitEdits();
+  });
+
   pagerPrev.addEventListener('click', function () {
-    if (page > 0) { page--; renderPage(); }
+    if (page > 0) { commitEdits(); page--; renderPage(); }
   });
   pagerNext.addEventListener('click', function () {
+    commitEdits();
     const total = Math.ceil((loaded ? loaded.size : 0) / PAGE_SIZE);
     if (page < total - 1) { page++; renderPage(); }
   });
 
+  dumpFormatBtn.addEventListener('click', function () {
+    if (!loaded) return;
+    commitEdits();
+    renderPage();
+  });
+
   dumpCopyBtn.addEventListener('click', function () {
     if (!loaded) return;
+    commitEdits();
     const hex = bytesToHex(loaded.bytes);
     navigator.clipboard.writeText(hex).then(function () {
       const orig = dumpCopyBtn.textContent;
@@ -290,12 +368,13 @@
 
   dumpDownloadBtn.addEventListener('click', function () {
     if (!loaded) return;
-    const hex = bytesToHex(loaded.bytes);
-    const blob = new Blob([hex], { type: 'text/plain' });
+    commitEdits();
+    /* Téléchargement du fichier binaire modifié, pas du hex texte */
+    const blob = new Blob([loaded.bytes], { type: 'application/octet-stream' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = loaded.name + '.hex.txt';
+    a.download = loaded.name.replace(/(\.[^.]+)?$/, '.edited$1');
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
