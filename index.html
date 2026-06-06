@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hex Converter — Billel</title>
+  <link rel="stylesheet" href="./token.css" />
+  <link rel="stylesheet" href="./components.css" />
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <header class="app-header">
+    <a
+      class="app-header__brand"
+      href="https://www.billeltighidet.fr/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Billel"
+    >Billel</a>
+    <div class="app-header__actions">
+      <button id="resetBtn" class="btn btn--quaternary btn--sm" type="button">Tout vider</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero hero--compact">
+      <h1 class="hero__title">Hexadecimal converter.</h1>
+    </section>
+
+    <!-- ============ FICHIER ============ -->
+    <section class="block">
+      <header class="block__head">
+        <h2 class="block__title">Fichier binaire</h2>
+        <span class="block__sub">rom, bin, exe, img — tout reste local</span>
+      </header>
+
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" class="dropzone__input" />
+        <div class="dropzone__inner">
+          <span class="dropzone__title">Dépose un fichier ici</span>
+          <label for="fileInput" class="btn btn--tertiary btn--sm">Choisir un fichier</label>
+        </div>
+      </div>
+
+      <div class="file-view" id="fileView" hidden>
+        <div class="file-view__head">
+          <div class="file-view__info">
+            <span class="file-view__name" id="fileName">—</span>
+            <span class="file-view__size" id="fileSize">—</span>
+          </div>
+          <div class="file-view__actions">
+            <button class="btn btn--quaternary btn--sm" type="button" id="dumpCopy">Copier hex</button>
+            <button class="btn btn--quaternary btn--sm" type="button" id="dumpDownload">Télécharger .hex</button>
+            <button class="btn btn--quaternary btn--sm" type="button" id="dumpClear">Vider</button>
+          </div>
+        </div>
+
+        <pre class="hex-dump" id="hexDump"></pre>
+
+        <div class="file-view__pager" id="filePager" hidden>
+          <button class="btn-link" type="button" id="pagerPrev">←</button>
+          <span class="file-view__pager-status" id="pagerStatus">—</span>
+          <button class="btn-link" type="button" id="pagerNext">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONVERTER ============ -->
+    <section class="block">
+      <header class="block__head">
+        <h2 class="block__title">Conversion entre bases</h2>
+        <span class="block__sub">tape dans un champ, les autres se mettent à jour</span>
+      </header>
+
+      <div class="converter">
+        <div class="converter__field">
+          <label class="converter__label" for="hexInput">Hex · base 16</label>
+          <div class="field--inline">
+            <span class="converter__prefix">0x</span>
+            <input id="hexInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="16" />
+            <button class="field--inline__action" type="button" data-copy="hexInput">Copier</button>
+          </div>
+        </div>
+
+        <div class="converter__field">
+          <label class="converter__label" for="decInput">Décimal · base 10</label>
+          <div class="field--inline">
+            <input id="decInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="10" />
+            <button class="field--inline__action" type="button" data-copy="decInput">Copier</button>
+          </div>
+        </div>
+
+        <div class="converter__field">
+          <label class="converter__label" for="octInput">Octal · base 8</label>
+          <div class="field--inline">
+            <span class="converter__prefix">0o</span>
+            <input id="octInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="8" />
+            <button class="field--inline__action" type="button" data-copy="octInput">Copier</button>
+          </div>
+        </div>
+
+        <div class="converter__field">
+          <label class="converter__label" for="binInput">Binaire · base 2</label>
+          <div class="field--inline">
+            <span class="converter__prefix">0b</span>
+            <input id="binInput" class="input converter__input converter__input--mono" type="text" spellcheck="false" autocomplete="off" data-base="2" />
+            <button class="field--inline__action" type="button" data-copy="binInput">Copier</button>
+          </div>
+        </div>
+
+        <div class="converter__field">
+          <label class="converter__label" for="textInput">Texte · UTF-8</label>
+          <div class="field--inline">
+            <input id="textInput" class="input converter__input--text" type="text" spellcheck="false" autocomplete="off" />
+            <button class="field--inline__action" type="button" data-copy="textInput">Copier</button>
+          </div>
+        </div>
+
+        <p class="converter__error" id="errorMsg" hidden></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer app-footer--slim">
+    <div class="app-footer__bottom">
+      <span>
+        © 2026 ·
+        <a
+          href="https://www.billeltighidet.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Billel"
+          class="footer-brand-link"
+        >Billel</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
