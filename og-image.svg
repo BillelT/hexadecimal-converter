@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#ffffff"/>
+
+  <!-- Subtle paper band at bottom -->
+  <rect x="0" y="500" width="1200" height="130" fill="#f5f5f5"/>
+
+  <!-- Top: brand wordmark -->
+  <text
+    x="80"
+    y="100"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="28"
+    font-weight="500"
+    fill="#1e1b22"
+  >Billel</text>
+
+  <!-- Pill "Outil" -->
+  <g transform="translate(80, 140)">
+    <rect width="84" height="32" rx="16" fill="#1e1b22"/>
+    <text
+      x="42"
+      y="22"
+      text-anchor="middle"
+      font-family="system-ui, -apple-system, sans-serif"
+      font-size="14"
+      font-weight="600"
+      fill="#ffffff"
+    >Outil</text>
+  </g>
+
+  <!-- Big title -->
+  <text
+    x="80"
+    y="290"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="104"
+    font-weight="500"
+    fill="#1e1b22"
+  >Hexadecimal</text>
+  <text
+    x="80"
+    y="400"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="104"
+    font-weight="500"
+    font-style="italic"
+    fill="#1e1b22"
+  >converter<tspan fill="#f06800">.</tspan></text>
+
+  <!-- Hex strip preview at bottom -->
+  <g font-family="ui-monospace, Menlo, Monaco, monospace" font-size="20" fill="#423e46" letter-spacing="2">
+    <text x="80" y="550">00000000</text>
+    <text x="220" y="550">48 65 6c 6c 6f 20 42 69 6c 6c 65 6c 21</text>
+    <text x="700" y="550">Hello Billel!</text>
+  </g>
+  <g font-family="ui-monospace, Menlo, Monaco, monospace" font-size="20" fill="#aaa9b2" letter-spacing="2">
+    <text x="80" y="590">00000010</text>
+    <text x="220" y="590">f0 68 00 · 68 00 f0 · 1e 1b 22</text>
+  </g>
+
+  <!-- Right-side accent: hex grid -->
+  <g opacity="0.9" font-family="ui-monospace, Menlo, Monaco, monospace" font-size="32" font-weight="600">
+    <text x="930" y="220" fill="#f06800">0x</text>
+    <text x="1000" y="220" fill="#1e1b22">FF</text>
+    <text x="930" y="280" fill="#6800f0">0b</text>
+    <text x="1000" y="280" fill="#1e1b22">11</text>
+    <text x="930" y="340" fill="#aaa9b2">0o</text>
+    <text x="1000" y="340" fill="#1e1b22">77</text>
+  </g>
+
+  <!-- Domain bottom-right -->
+  <text
+    x="1120"
+    y="100"
+    text-anchor="end"
+    font-family="ui-monospace, Menlo, Monaco, monospace"
+    font-size="16"
+    fill="#aaa9b2"
+  >billeltighidet.fr</text>
+</svg>
