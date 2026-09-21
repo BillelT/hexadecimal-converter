@@ -2,33 +2,65 @@
   <!-- Background -->
   <rect width="1200" height="630" fill="#fff9f5"/>
 
-  <!-- Brand wordmark -->
-  <text
-    x="80"
-    y="100"
-    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font-size="28"
-    font-weight="700"
-    fill="#120f0d"
-  >Billel</text>
+  <!-- Function breadcrumb — the base conversions the tool does -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700" letter-spacing="2">
+    <text x="80" y="106" fill="#120f0d">HEX</text>
+    <text x="155" y="106" fill="#dcd5d0">&#8594;</text>
+    <text x="187" y="106" fill="#120f0d">DEC</text>
+    <text x="262" y="106" fill="#dcd5d0">&#8594;</text>
+    <text x="294" y="106" fill="#120f0d">OCT</text>
+    <text x="368" y="106" fill="#dcd5d0">&#8594;</text>
+    <text x="400" y="106" fill="#120f0d">BIN</text>
+  </g>
 
   <!-- Title -->
   <text
     x="80"
-    y="310"
+    y="260"
     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font-size="104"
+    font-size="84"
     font-weight="700"
-    letter-spacing="-3"
+    letter-spacing="-2"
     fill="#120f0d"
   >Hexadecimal</text>
   <text
     x="80"
-    y="420"
+    y="356"
     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font-size="104"
+    font-size="84"
     font-weight="700"
-    letter-spacing="-3"
+    letter-spacing="-2"
     fill="#120f0d"
   >converter<tspan fill="#f06800">.</tspan></text>
+
+  <!-- Subtitle — what the tool does -->
+  <text
+    x="80"
+    y="416"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="25"
+    fill="#3b3735"
+  >Numeral base &amp; UTF-8 converter, plus a binary file inspector.</text>
+
+  <!-- Signature -->
+  <text
+    x="80"
+    y="470"
+    font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+    font-size="18"
+    fill="#93857d"
+  >a tool by Billel</text>
+
+  <!-- Graphic representation — app icon, matches the favicon -->
+  <rect x="840" y="175" width="280" height="280" rx="48" fill="#f1edeb"/>
+  <text
+    x="980"
+    y="347"
+    text-anchor="middle"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="120"
+    font-weight="700"
+    fill="#120f0d"
+  >0x</text>
+  <circle cx="1093" cy="202" r="14" fill="#f06800"/>
 </svg>
