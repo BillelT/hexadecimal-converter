@@ -15,6 +15,11 @@ button, input, textarea {
   color: inherit;
 }
 
+.input::placeholder {
+  color: var(--b-text-faint);
+  opacity: 1;
+}
+
 html, body {
   background: var(--b-surface);
   color: var(--b-ink);
@@ -49,6 +54,13 @@ main.page {
 .hero--compact .hero__title {
   font-size: clamp(40px, 5vw, 56px);
   max-width: none;
+}
+
+.hero__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--b-space-16);
 }
 
 /* ---------- Block (section générique) ----------------------------------- */
@@ -333,6 +345,8 @@ main.page {
   .block__head { flex-direction: column; align-items: flex-start; gap: var(--b-space-4); }
 
   .hero--compact .hero__title { font-size: 36px; }
+
+  .hero__row { flex-wrap: wrap; }
 
   .dropzone { padding: var(--b-space-32) var(--b-space-16); }
 

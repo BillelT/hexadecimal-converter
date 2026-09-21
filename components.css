@@ -221,33 +221,6 @@
   max-width: 16ch;
 }
 
-/* ---------- App header --------------------------------------------------- */
-
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--b-space-24);
-  padding: var(--b-space-16) var(--b-space-32);
-  background: var(--b-surface);
-  border-bottom: 1px solid var(--b-border);
-}
-
-.app-header__brand {
-  font-family: var(--b-font-sans);
-  font-size: var(--b-text-xl);
-  font-weight: var(--b-font-bold);
-  letter-spacing: var(--b-tracking-tight);
-  color: var(--b-ink);
-  text-decoration: none;
-}
-
-.app-header__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--b-space-12);
-}
-
 /* ---------- App footer --------------------------------------------------- */
 
 .app-footer {

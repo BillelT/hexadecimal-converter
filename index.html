@@ -25,22 +25,12 @@
   <link rel="stylesheet" href="./app.css" />
 </head>
 <body>
-  <header class="app-header">
-    <a
-      class="app-header__brand"
-      href="https://www.billeltighidet.fr/"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Billel"
-    >Billel</a>
-    <div class="app-header__actions">
-      <button id="resetBtn" class="btn btn-ghost" type="button">Tout vider</button>
-    </div>
-  </header>
-
   <main class="page">
     <section class="hero hero--compact">
-      <h1 class="hero__title">Hexadecimal converter.</h1>
+      <div class="hero__row">
+        <h1 class="hero__title">Hexadecimal converter.</h1>
+        <button id="resetBtn" class="btn btn-ghost" type="button">Tout vider</button>
+      </div>
     </section>
 
     <!-- ============ FICHIER ============ -->
@@ -103,7 +93,7 @@
           <div class="field-inline">
             <div class="converter__control">
               <span class="converter__prefix">0x</span>
-              <input id="hexInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="16" />
+              <input id="hexInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="16" placeholder="FF" />
             </div>
             <button class="btn btn-ghost" type="button" data-copy="hexInput">Copier</button>
           </div>
@@ -112,7 +102,7 @@
         <div class="converter__field">
           <label class="converter__label" for="decInput">Décimal · base 10</label>
           <div class="field-inline">
-            <input id="decInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="10" />
+            <input id="decInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="10" placeholder="255" />
             <button class="btn btn-ghost" type="button" data-copy="decInput">Copier</button>
           </div>
         </div>
@@ -122,7 +112,7 @@
           <div class="field-inline">
             <div class="converter__control">
               <span class="converter__prefix">0o</span>
-              <input id="octInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="8" />
+              <input id="octInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="8" placeholder="377" />
             </div>
             <button class="btn btn-ghost" type="button" data-copy="octInput">Copier</button>
           </div>
@@ -133,7 +123,7 @@
           <div class="field-inline">
             <div class="converter__control">
               <span class="converter__prefix">0b</span>
-              <input id="binInput" class="input converter__input converter__input--mono" type="text" spellcheck="false" autocomplete="off" data-base="2" />
+              <input id="binInput" class="input converter__input converter__input--mono" type="text" spellcheck="false" autocomplete="off" data-base="2" placeholder="11111111" />
             </div>
             <button class="btn btn-ghost" type="button" data-copy="binInput">Copier</button>
           </div>
@@ -142,7 +132,7 @@
         <div class="converter__field">
           <label class="converter__label" for="textInput">Texte · UTF-8</label>
           <div class="field-inline">
-            <input id="textInput" class="input converter__input--text" type="text" spellcheck="false" autocomplete="off" />
+            <input id="textInput" class="input converter__input--text" type="text" spellcheck="false" autocomplete="off" placeholder="Hello" />
             <button class="btn btn-ghost" type="button" data-copy="textInput">Copier</button>
           </div>
         </div>
