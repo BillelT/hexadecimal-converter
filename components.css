@@ -5,8 +5,9 @@
    variables exposées par `token.css`. N'écris JAMAIS de valeur en dur ici —
    tout doit passer par var(--b-…).
 
-   Sous-ensemble courant de la skill b-button (base) + b-input (champs) +
-   layouts projet (hero / header / footer, propres à ce site).
+   Sous-ensemble courant de la skill b-button (base) + b-input (champs,
+   switch). Les layouts (page-head / workspace / file-reader / page-foot)
+   sont propres à ce projet et vivent dans app.css.
 ============================================================================= */
 
 /* ---------- Buttons ------------------------------------------------------ */
@@ -273,50 +274,3 @@
   cursor: not-allowed;
 }
 
-/* =============================================================================
-   Layouts — propres à ce projet (archétype outil : header/footer/hero réduits
-   au strict nécessaire, hors cascade b-header/b-footer/b-hero standard).
-============================================================================= */
-
-/* ---------- Hero ------------------------------------------------------- */
-
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--b-space-24);
-  padding: var(--b-space-64) var(--b-space-32);
-  background: var(--b-surface);
-}
-
-.hero__title {
-  margin: 0;
-  font-family: var(--b-font-sans);
-  font-size: clamp(40px, 6vw, 72px);
-  font-weight: var(--b-font-bold);
-  line-height: var(--b-leading-none);
-  letter-spacing: var(--b-tracking-tighter);
-  color: var(--b-ink);
-  max-width: 16ch;
-}
-
-/* ---------- App footer --------------------------------------------------- */
-
-.app-footer {
-  display: flex;
-  flex-direction: column;
-  padding: var(--b-space-48) var(--b-space-32) var(--b-space-24);
-  background: var(--b-surface-muted);
-  border-top: 1px solid var(--b-border);
-}
-
-.app-footer__bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: var(--b-space-24);
-  border-top: 1px solid var(--b-border);
-  font-family: var(--b-font-sans);
-  font-size: var(--b-text-xs);
-  color: var(--b-text-faint);
-}

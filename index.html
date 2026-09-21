@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hexadecimal converter — Billel</title>
-  <meta name="description" content="Convertisseur hexadécimal — bases numériques (hex, décimal, octal, binaire), texte UTF-8, et inspecteur de fichier binaire avec dump xxd. Outil par Billel." />
+  <meta name="description" content="Hexadecimal converter — numeral bases (hex, decimal, octal, binary), UTF-8 text, and a binary file inspector with an xxd-style dump. A tool by Billel." />
 
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Hexadecimal converter — Billel" />
-  <meta property="og:description" content="Convertisseur hex / décimal / octal / binaire / UTF-8 + inspecteur de fichier binaire." />
+  <meta property="og:description" content="Hex / decimal / octal / binary / UTF-8 converter + binary file inspector." />
   <meta property="og:image" content="./og-image.svg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hexadecimal converter — Billel" />
-  <meta name="twitter:description" content="Convertisseur hex / décimal / octal / binaire / UTF-8 + inspecteur de fichier binaire." />
+  <meta name="twitter:description" content="Hex / decimal / octal / binary / UTF-8 converter + binary file inspector." />
   <meta name="twitter:image" content="./og-image.svg" />
 
   <link rel="stylesheet" href="./token.css" />
@@ -25,67 +25,21 @@
   <link rel="stylesheet" href="./app.css" />
 </head>
 <body>
-  <main class="page">
-    <section class="hero hero--compact">
-      <div class="hero__row">
-        <h1 class="hero__title">Hexadecimal converter.</h1>
-        <button id="resetBtn" class="btn btn-ghost" type="button">Tout vider</button>
-      </div>
-    </section>
+  <main class="app">
+    <header class="page-head">
+      <h1 class="page-head__title">Hexadecimal converter</h1>
+      <button id="resetBtn" class="btn btn-ghost" type="button">Empty</button>
+    </header>
 
-    <!-- ============ FICHIER ============ -->
-    <section class="block">
-      <header class="block__head">
-        <h2 class="block__title">Fichier binaire</h2>
-        <span class="block__sub">rom, bin, exe, img — tout reste local</span>
-      </header>
-
+    <section class="workspace">
       <div class="dropzone" id="dropzone">
         <input type="file" id="fileInput" class="dropzone__input" />
         <div class="dropzone__inner">
-          <span class="dropzone__title">Dépose un fichier ici</span>
-          <label for="fileInput" class="btn btn-tiertary">Choisir un fichier</label>
+          <span class="dropzone__title">Drop a file here</span>
+          <span class="dropzone__hint">rom · bin · exe · img</span>
+          <label for="fileInput" class="btn btn-tiertary">Choose a file</label>
         </div>
       </div>
-
-      <div class="file-view" id="fileView" hidden>
-        <div class="file-view__head">
-          <div class="file-view__info">
-            <span class="file-view__name" id="fileName">—</span>
-            <span class="file-view__size" id="fileSize">—</span>
-          </div>
-          <div class="file-view__actions">
-            <button class="btn btn-ghost" type="button" id="dumpFormat">Reformater</button>
-            <button class="btn btn-ghost" type="button" id="dumpCopy">Copier hex</button>
-            <button class="btn btn-ghost" type="button" id="dumpDownload">Télécharger</button>
-            <button class="btn btn-ghost" type="button" id="dumpClear">Vider</button>
-          </div>
-        </div>
-
-        <textarea
-          class="hex-dump"
-          id="hexDump"
-          spellcheck="false"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          wrap="off"
-        ></textarea>
-
-        <div class="file-view__pager" id="filePager" hidden>
-          <button class="btn btn-ghost" type="button" id="pagerPrev">←</button>
-          <span class="file-view__pager-status" id="pagerStatus">—</span>
-          <button class="btn btn-ghost" type="button" id="pagerNext">→</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONVERTER ============ -->
-    <section class="block">
-      <header class="block__head">
-        <h2 class="block__title">Conversion entre bases</h2>
-        <span class="block__sub">tape dans un champ, les autres se mettent à jour</span>
-      </header>
 
       <div class="converter">
         <div class="converter__field">
@@ -95,15 +49,15 @@
               <span class="converter__prefix">0x</span>
               <input id="hexInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="16" placeholder="FF" />
             </div>
-            <button class="btn btn-ghost" type="button" data-copy="hexInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="hexInput">Copy</button>
           </div>
         </div>
 
         <div class="converter__field">
-          <label class="converter__label" for="decInput">Décimal · base 10</label>
+          <label class="converter__label" for="decInput">Decimal · base 10</label>
           <div class="field-inline">
             <input id="decInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="10" placeholder="255" />
-            <button class="btn btn-ghost" type="button" data-copy="decInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="decInput">Copy</button>
           </div>
         </div>
 
@@ -114,46 +68,69 @@
               <span class="converter__prefix">0o</span>
               <input id="octInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="8" placeholder="377" />
             </div>
-            <button class="btn btn-ghost" type="button" data-copy="octInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="octInput">Copy</button>
           </div>
         </div>
 
         <div class="converter__field">
-          <label class="converter__label" for="binInput">Binaire · base 2</label>
+          <label class="converter__label" for="binInput">Binary · base 2</label>
           <div class="field-inline">
             <div class="converter__control">
               <span class="converter__prefix">0b</span>
               <input id="binInput" class="input converter__input converter__input--mono" type="text" spellcheck="false" autocomplete="off" data-base="2" placeholder="11111111" />
             </div>
-            <button class="btn btn-ghost" type="button" data-copy="binInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="binInput">Copy</button>
           </div>
         </div>
 
         <div class="converter__field">
-          <label class="converter__label" for="textInput">Texte · UTF-8</label>
+          <label class="converter__label" for="textInput">Text · UTF-8</label>
           <div class="field-inline">
             <input id="textInput" class="input converter__input--text" type="text" spellcheck="false" autocomplete="off" placeholder="Hello" />
-            <button class="btn btn-ghost" type="button" data-copy="textInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="textInput">Copy</button>
           </div>
         </div>
 
         <p class="converter__error" id="errorMsg" hidden></p>
       </div>
     </section>
+
+    <section class="file-reader" id="fileView">
+      <div class="file-reader__head">
+        <div class="file-reader__info">
+          <span class="file-reader__name" id="fileName">No file loaded</span>
+          <span class="file-reader__size" id="fileSize"></span>
+        </div>
+        <div class="file-reader__actions">
+          <button class="btn btn-ghost" type="button" id="dumpFormat">Reformat</button>
+          <button class="btn btn-ghost" type="button" id="dumpCopy">Copy hex</button>
+          <button class="btn btn-ghost" type="button" id="dumpDownload">Download</button>
+          <button class="btn btn-ghost" type="button" id="dumpClear">Clear</button>
+        </div>
+      </div>
+
+      <textarea
+        class="hex-dump"
+        id="hexDump"
+        spellcheck="false"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        wrap="off"
+        placeholder="Drop a file above to inspect its bytes."
+      ></textarea>
+
+      <div class="file-reader__pager" id="filePager" hidden>
+        <button class="btn btn-ghost" type="button" id="pagerPrev">←</button>
+        <span class="file-reader__pager-status" id="pagerStatus">—</span>
+        <button class="btn btn-ghost" type="button" id="pagerNext">→</button>
+      </div>
+    </section>
   </main>
 
-  <footer class="app-footer app-footer--slim">
-    <div class="app-footer__bottom">
-      <span>
-        © 2026 ·
-        <a
-          href="https://www.billeltighidet.fr/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Billel"
-          class="footer-brand-link"
-        >Billel</a>
-      </span>
+  <footer class="page-foot">
+    <span class="page-foot__name">Hex converter</span>
+    <div class="page-foot__right">
       <label class="check">
         <span class="switch">
           <input type="checkbox" id="sound-toggle" checked>
@@ -161,6 +138,11 @@
         </span>
         sound
       </label>
+      <span class="page-foot__credit">
+        <a class="text-link" href="https://www.billeltighidet.fr/" target="_blank" rel="noopener" aria-label="Billel">Billel</a>
+        ·
+        <a class="text-link" href="https://twitter.com/billel_tighidet" target="_blank" rel="noopener noreferrer">@billel_tighidet</a>
+      </span>
     </div>
   </footer>
 

@@ -91,7 +91,7 @@
     }
 
     if (!cfg.re.test(value)) {
-      setError('Caractère non valide pour la base ' + base + '.');
+      setError('Invalid character for base ' + base + '.');
       return;
     }
 
@@ -124,7 +124,7 @@
       const raw = target === textInput ? target.value : target.value.replace(/\s+/g, '');
       navigator.clipboard.writeText(raw).then(function () {
         const orig = btn.textContent;
-        btn.textContent = 'Copié';
+        btn.textContent = 'Copied';
         setTimeout(function () { btn.textContent = orig; }, 1200);
       }).catch(function () { target.select(); });
     });
@@ -143,7 +143,6 @@
 
   const dropzone = document.getElementById('dropzone');
   const fileInput = document.getElementById('fileInput');
-  const fileView = document.getElementById('fileView');
   const fileNameEl = document.getElementById('fileName');
   const fileSizeEl = document.getElementById('fileSize');
   const hexDumpEl = document.getElementById('hexDump');
@@ -163,10 +162,10 @@
   let page = 0;
 
   function fmtSize(n) {
-    if (n < 1024) return n + ' o';
-    if (n < 1048576) return (n / 1024).toFixed(1) + ' Ko';
-    if (n < 1073741824) return (n / 1048576).toFixed(2) + ' Mo';
-    return (n / 1073741824).toFixed(2) + ' Go';
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    if (n < 1073741824) return (n / 1048576).toFixed(2) + ' MB';
+    return (n / 1073741824).toFixed(2) + ' GB';
   }
 
   function ascii(b) {
@@ -263,7 +262,7 @@
     merged.set(after, before.length + parsed.length);
     loaded.bytes = merged;
     loaded.size = merged.length;
-    fileSizeEl.textContent = fmtSize(loaded.size) + ' · ' + loaded.size + ' octets · modifié';
+    fileSizeEl.textContent = fmtSize(loaded.size) + ' · ' + loaded.size + ' bytes · edited';
   }
 
   function loadFile(file) {
@@ -274,12 +273,11 @@
       loaded = { name: file.name, size: bytes.length, bytes: bytes };
       page = 0;
       fileNameEl.textContent = file.name;
-      fileSizeEl.textContent = fmtSize(bytes.length) + ' · ' + bytes.length + ' octets';
-      fileView.hidden = false;
+      fileSizeEl.textContent = fmtSize(bytes.length) + ' · ' + bytes.length + ' bytes';
       renderPage();
     };
     reader.onerror = function () {
-      setError('Lecture du fichier impossible.');
+      setError('Could not read the file.');
     };
     reader.readAsArrayBuffer(file);
   }
@@ -288,8 +286,10 @@
     loaded = null;
     page = 0;
     fileInput.value = '';
-    fileView.hidden = true;
-    hexDumpEl.textContent = '';
+    fileNameEl.textContent = 'No file loaded';
+    fileSizeEl.textContent = '';
+    hexDumpEl.value = '';
+    pagerEl.hidden = true;
   }
 
   fileInput.addEventListener('change', function (e) {
@@ -359,10 +359,10 @@
     const hex = bytesToHex(loaded.bytes);
     navigator.clipboard.writeText(hex).then(function () {
       const orig = dumpCopyBtn.textContent;
-      dumpCopyBtn.textContent = 'Copié';
+      dumpCopyBtn.textContent = 'Copied';
       setTimeout(function () { dumpCopyBtn.textContent = orig; }, 1500);
     }).catch(function () {
-      setError('Copie refusée par le navigateur.');
+      setError('Clipboard copy was blocked by the browser.');
     });
   });
 
