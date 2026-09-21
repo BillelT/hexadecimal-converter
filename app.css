@@ -119,9 +119,19 @@ body {
 }
 
 .dropzone__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--b-space-8);
   font-family: var(--b-font-sans);
   font-size: var(--b-text-sm);
   color: var(--b-text-muted);
+}
+
+.dropzone__title .icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  display: block;
 }
 
 .dropzone__hint {

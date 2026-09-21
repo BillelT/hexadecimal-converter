@@ -35,7 +35,14 @@
       <div class="dropzone" id="dropzone">
         <input type="file" id="fileInput" class="dropzone__input" />
         <div class="dropzone__inner">
-          <span class="dropzone__title">Upload a file</span>
+          <span class="dropzone__title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            Upload a file
+          </span>
           <span class="dropzone__hint">rom · bin · exe · img</span>
         </div>
       </div>
@@ -101,10 +108,38 @@
           <span class="file-reader__size" id="fileSize"></span>
         </div>
         <div class="file-reader__actions">
-          <button class="btn btn-ghost" type="button" id="dumpFormat">Reformat</button>
-          <button class="btn btn-ghost" type="button" id="dumpCopy">Copy hex</button>
-          <button class="btn btn-ghost" type="button" id="dumpDownload">Download</button>
-          <button class="btn btn-ghost" type="button" id="dumpClear">Clear</button>
+          <button class="btn btn-ghost" type="button" id="dumpFormat">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Reformat
+          </button>
+          <button class="btn btn-tiertary" type="button" id="dumpCopy">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy hex
+          </button>
+          <button class="btn btn-tiertary" type="button" id="dumpDownload">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download
+          </button>
+          <button class="btn btn-ghost" type="button" id="dumpClear">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+            Clear
+          </button>
         </div>
       </div>
 
