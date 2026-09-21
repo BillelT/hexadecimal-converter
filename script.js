@@ -389,4 +389,87 @@
       if (!dropzone.contains(e.target)) e.preventDefault();
     });
   });
+
+  /* ========================================================================
+     SOUND — feedback sonore d'interface (b-audio · @web-kits/audio)
+     Actif par défaut, opt-out via le toggle du footer. Reduced-motion ⇒
+     démarre coupé. Contexte audio débloqué au 1er geste seulement.
+     ===================================================================== */
+
+  const soundToggle = document.getElementById('sound-toggle');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let soundOn = !reducedMotion;
+  soundToggle.checked = soundOn;
+  soundToggle.disabled = reducedMotion;
+  soundToggle.addEventListener('change', function () {
+    soundOn = soundToggle.checked && !reducedMotion;
+  });
+
+  let palettePromise = null;
+  let audioUnlocked = false;
+
+  /* Chargement paresseux — la lib n'est importée qu'au premier geste sonore. */
+  function loadPalette() {
+    if (!palettePromise) {
+      palettePromise = import('https://esm.sh/@web-kits/audio@0.1.0').then(function (mod) {
+        const defineSound = mod.defineSound;
+        const defineSequence = mod.defineSequence;
+
+        /* Reformater : blip de bascule de mode (schéma "tab" du DS) */
+        const playReformat = defineSound({
+          source: { type: 'sine', frequency: 880 },
+          envelope: { attack: 0.001, decay: 0.06, sustain: 0, release: 0.02 },
+          gain: 0.18,
+        });
+
+        /* Copier / Télécharger : deux notes montantes (succès / export) */
+        const copyA = defineSound({
+          source: { type: 'sine', frequency: 880 },
+          envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.04 },
+          gain: 0.18,
+        });
+        const copyB = defineSound({
+          source: { type: 'sine', frequency: 1320 },
+          envelope: { attack: 0.001, decay: 0.10, sustain: 0, release: 0.05 },
+          gain: 0.20,
+        });
+        const playCopy = defineSequence([{ sound: copyA, at: 0 }, { sound: copyB, at: 0.08 }]);
+
+        /* Reset / Vider : glissando descendant */
+        const playReset = defineSound({
+          source: { type: 'sine', frequency: { start: 800, end: 200 } },
+          envelope: { attack: 0.005, decay: 0.18, sustain: 0, release: 0.05 },
+          gain: 0.16,
+        });
+
+        return {
+          playReformat: playReformat,
+          playCopy: playCopy,
+          playReset: playReset,
+          ensureReady: mod.ensureReady,
+        };
+      });
+    }
+    return palettePromise;
+  }
+
+  /* Garde unique : rien ne joue tant que le toggle est OFF ; le 1er geste
+     débloque le contexte (politique d'autoplay des navigateurs). */
+  function feedback(pick) {
+    if (!soundOn) return;
+    loadPalette().then(function (palette) {
+      const unlock = audioUnlocked ? Promise.resolve() : palette.ensureReady().then(function () { audioUnlocked = true; });
+      unlock.then(function () { pick(palette)(); });
+    }).catch(function () { /* lib injoignable → pas de son, le reste de l'outil continue */ });
+  }
+
+  /* Branchement, sélectif — sliders/pager restent muets, comme sur boids */
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () { feedback(function (p) { return p.playCopy; }); });
+  });
+  dumpCopyBtn.addEventListener('click', function () { feedback(function (p) { return p.playCopy; }); });
+  dumpDownloadBtn.addEventListener('click', function () { feedback(function (p) { return p.playCopy; }); });
+  resetBtn.addEventListener('click', function () { feedback(function (p) { return p.playReset; }); });
+  dumpClearBtn.addEventListener('click', function () { feedback(function (p) { return p.playReset; }); });
+  dumpFormatBtn.addEventListener('click', function () { feedback(function (p) { return p.playReformat; }); });
 })();

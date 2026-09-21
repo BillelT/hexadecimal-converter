@@ -194,6 +194,85 @@
   cursor: not-allowed;
 }
 
+/* Switch (.switch) — case native cachée + slider visuel */
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.slider {
+  width: 24px;
+  height: 14px;
+  background: var(--b-switch-off);
+  border-radius: var(--b-radius-full);
+  position: relative;
+  transition: background var(--b-duration-slow);
+  flex-shrink: 0;
+  box-shadow: var(--b-shadow-switch-track);
+}
+
+.slider::after {
+  content: "";
+  position: absolute;
+  top: var(--b-space-2);
+  left: var(--b-space-2);
+  width: 10px;
+  height: 10px;
+  background: var(--b-white);
+  border-radius: 50%;
+  transition:
+    left var(--b-duration-slow),
+    background var(--b-duration-slow);
+  box-shadow: var(--b-shadow-switch-thumb);
+}
+
+.switch input:checked + .slider {
+  background: var(--b-ink);
+}
+
+.switch input:checked + .slider::after {
+  left: 12px;
+}
+
+.switch input:disabled + .slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Libellé cliquable d'un switch */
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--b-space-8);
+  font-size: var(--b-text-xs);
+  color: var(--b-ink);
+  cursor: pointer;
+}
+
+.check:active {
+  transform: translateY(0.5px);
+}
+
+.check:has(.switch input:not(:checked)) {
+  color: var(--b-text-muted);
+}
+
+.check:has(.switch input:disabled) {
+  color: var(--b-text-muted);
+  cursor: not-allowed;
+}
+
 /* =============================================================================
    Layouts — propres à ce projet (archétype outil : header/footer/hero réduits
    au strict nécessaire, hors cascade b-header/b-footer/b-hero standard).
