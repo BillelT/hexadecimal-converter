@@ -17,7 +17,6 @@
 
   const textInput = document.getElementById('textInput');
   const errorMsg = document.getElementById('errorMsg');
-  const resetBtn = document.getElementById('resetBtn');
 
   const encoder = new TextEncoder();
   const decoder = new TextDecoder('utf-8', { fatal: true });
@@ -128,13 +127,6 @@
         setTimeout(function () { btn.textContent = orig; }, 1200);
       }).catch(function () { target.select(); });
     });
-  });
-
-  resetBtn.addEventListener('click', function () {
-    for (const b in inputs) inputs[b].value = '';
-    textInput.value = '';
-    setError('');
-    clearFile();
   });
 
   /* ========================================================================
@@ -468,7 +460,6 @@
   });
   dumpCopyBtn.addEventListener('click', function () { feedback(function (p) { return p.playCopy; }); });
   dumpDownloadBtn.addEventListener('click', function () { feedback(function (p) { return p.playCopy; }); });
-  resetBtn.addEventListener('click', function () { feedback(function (p) { return p.playReset; }); });
   dumpClearBtn.addEventListener('click', function () { feedback(function (p) { return p.playReset; }); });
   dumpFormatBtn.addEventListener('click', function () { feedback(function (p) { return p.playReformat; }); });
 })();
