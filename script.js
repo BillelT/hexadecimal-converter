@@ -297,10 +297,9 @@
     if (f) loadFile(f);
   });
 
-  dropzone.addEventListener('click', function (e) {
-    if (e.target === dropzone || e.target.classList.contains('dropzone__inner') || e.target.classList.contains('dropzone__title')) {
-      fileInput.click();
-    }
+  /* Plus de bouton dédié : toute la zone ouvre le sélecteur de fichier. */
+  dropzone.addEventListener('click', function () {
+    fileInput.click();
   });
 
   ['dragenter', 'dragover'].forEach(function (ev) {
