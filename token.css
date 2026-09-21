@@ -1,103 +1,216 @@
-/* =============================================================================
-   Billel
-   ---------------------------------------------------------------------------
-   Source de vérité pour toutes les variables du design system : couleurs,
-   typographie, espacements, radii. À importer en premier dans tout projet.
-============================================================================= */
+/* =============================================================
+   Billel — token.css
+   Design system personnel — design tokens
+   -------------------------------------------------------------
+   Source UNIQUE de vérité des valeurs du DS.
+   Toute interface / tout skill doit charger ce fichier AVANT
+   sa propre feuille de styles, puis référencer var(--b-…).
 
-/* ---------- Reset -------------------------------------------------------- */
+   Règle d'or : on ne pose JAMAIS une valeur « à l'œil ».
+   Si une valeur n'existe pas ici, c'est qu'elle ne fait pas
+   partie du DS → demander avant d'inventer.
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-}
-
-/* ---------- Fonts -------------------------------------------------------- */
+   Palette perso (3 tons de gris + encre/blanc chauds + accent
+   orange). Voir b-token.md pour le détail des valeurs et des
+   quelques rôles dérivés faute de ton fourni (dark-mode).
+   ============================================================= */
 
 @font-face {
-  font-family: 'Switzer';
-  src: url('./fonts/Switzer_Complete/Switzer-Variable.woff2') format('woff2-variations');
-  font-weight: 100 900;
+  font-family: "Cabinet Grotesk";
+  src: url("./fonts/CabinetGrotesk-Variable.woff2") format("woff2-variations");
+  font-weight: 400 900;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Switzer';
-  src: url('./fonts/Switzer_Complete/Switzer-VariableItalic.woff2') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Zodiak';
-  src: url('./fonts/Zodiak_Complete/Zodiak-Variable.woff2') format('woff2-variations');
-  font-weight: 200 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Zodiak';
-  src: url('./fonts/Zodiak_Complete/Zodiak-VariableItalic.woff2') format('woff2-variations');
-  font-weight: 200 900;
-  font-style: italic;
   font-display: swap;
 }
 
 :root {
-  /* ---------- Colors · Neutrals ----------------------------------------- */
-  /* Échelle du plus clair au plus foncé.                                   */
-  --color-white: #ffffff;
-  --color-paper: #f5f5f5;
-  --color-fog: #d3d1d6;
-  --color-stone: #aaa9b2;
-  --color-slate: #423e46;
-  --color-ink: #1e1b22;
-  --color-black: #000000;
+  /* =========================================================
+     1. COULEURS
+     ========================================================= */
 
-  /* ---------- Colors · Brand ------------------------------------------- */
-  --color-primary-orange: #f06800;
-  --color-primary-purple: #6800f0;
+  /* ---- Primitives neutres (encre + blanc) ---- */
+  --b-black: #120f0d; /* encre pure — anneaux de focus */
+  --b-white: #fff9f5; /* blanc chaud — surface de base */
+  --b-ink: #120f0d; /* encre — TOUT le texte par défaut */
 
-  /* ---------- Typography ----------------------------------------------- */
-  --font-sans: 'Switzer', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Zodiak', Georgia, 'Times New Roman', serif;
+  /* ---- Rampe de gris (5 tons, palette perso — teintés orange marque hue 20-28°) ---- */
+  --b-gray-900: #333231; /* gris très foncé — texte sur fond clair (rare) */
+  --b-gray-700: #3b3735; /* gris fort — texte au hover sidebar, descriptions */
+  --b-gray-600: #93857d; /* gris medium — texte au hover sidebar, descriptions */
+  --b-gray-300: #dcd5d0; /* gris medium-light — bordures / éléments discrets */
+  --b-gray-100: #f1edeb; /* gris light — fonds discrets (ex. chatbox) */
 
-  /* ---------- Spacing -------------------------------------------------- */
-  /* Echelle 4px. Utilisable pour padding, margin, gap, top/left, etc.     */
-  /* Le suffixe = nombre × 4px. Ex : --space-8 = 32px.                     */
-  --space-0: 0;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
+  /* ---- Rôles de texte ---- */
+  --b-text: var(--b-ink); /* #120f0d — défaut */
+  --b-text-muted: var(
+    --b-gray-700
+  ); /* #3b3735 — descriptions, hints, sous-titres */
+  --b-text-faint: var(
+    --b-gray-700
+  ); /* pas de gris plus clair fourni pour le texte — alias sur 700 */
+  --b-text-control: var(
+    --b-gray-700
+  ); /* bouton tertiaire, libellés de contrôles */
 
-  /* ---------- Radius --------------------------------------------------- */
-  /* Échelle 4px. Utilisable directement via var(--radius-*) ou via les     */
-  /* classes utilitaires .rounded-* exposées dans components.css.          */
-  --radius-none: 0;
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
-  --radius-3xl: 28px;
-  --radius-4xl: 32px;
-  --radius-full: 9999px;
+  /* ---- Rôles de surface ---- */
+  --b-surface: var(--b-white); /* #fff9f5 */
+  --b-surface-muted: var(
+    --b-gray-100
+  ); /* #f1edeb — carte claire, état disabled */
+  --b-surface-sunken: var(
+    --b-gray-100
+  ); /* #f1edeb — fond de tabs, hover tertiaire */
 
-  /* ---------- Shadows -------------------------------------------------- */
-  /* --shadow-sm, --shadow-md, --shadow-lg */
+  /* ---- Rôles de bordure ---- */
+  --b-border: var(--b-gray-300); /* #dcd5d0 — hairline par défaut */
+  --b-border-subtle: var(
+    --b-gray-100
+  ); /* #f1edeb — bordure sur surface teintée (carte claire) */
+
+  /* ---- Schéma sombre (carte sombre, etc.) ---- */
+  /* ⚠️ Pas de gris clair fourni pour du texte/bordure SUR fond sombre :
+     dérivé du blanc de marque en alpha (technique standard), à valider si besoin d'une valeur exacte. */
+  --b-dark-surface: var(--b-black); /* #120f0d */
+  --b-dark-text: var(--b-white); /* #fff9f5 */
+  --b-dark-text-muted: #fff9f5a6; /* dérivé — blanc de marque à 65% */
+  --b-dark-border: #fff9f526; /* dérivé — blanc de marque à 15% */
+
+  /* ---- Accent de marque (orange) ---- */
+  --b-accent: hsl(26, 100%, 47%); /* orange de marque — CTA */
+  --b-accent-40: #f0680066; /* orange de marque à 40% — accents discrets */
+  --b-accent-20: #f0680033; /* orange de marque à 20% — surlignage de sélection */
+  --b-accent-red: #f04000; /* orange-red — accent GRAPHIQUE uniquement, jamais un signifiant d'état/interaction */
+
+  /* ---- Overlays utilitaires (pistes / voiles) ---- */
+  --b-track: rgba(0, 0, 0, 0.08); /* piste de slider */
+  --b-switch-off: rgba(0, 0, 0, 0.18); /* piste d'interrupteur OFF */
+  --b-scrollbar-thumb: rgba(0, 0, 0, 0.18); /* pouce de barre de défilement */
+
+  /* =========================================================
+     2. ESPACEMENT  (padding / margin / gap)
+     Échelle 4-based linéarisée — pas de 9/10/11/13/14 en espacement.
+     ========================================================= */
+  --b-space-2: 2px;
+  --b-space-4: 4px;
+  --b-space-6: 6px;
+  --b-space-8: 8px;
+  --b-space-12: 12px;
+  --b-space-16: 16px;
+  --b-space-20: 20px;
+  --b-space-24: 24px;
+  --b-space-32: 32px;
+  --b-space-48: 48px;
+  --b-space-64: 64px;
+  --b-space-96: 96px;
+
+  /* =========================================================
+     3. RAYONS
+     ========================================================= */
+  --b-radius-2xs: 2px; /* focus de lien, piste de slider */
+  --b-radius-xs: 4px; /* bouton tertiaire */
+  --b-radius-sm: 6px; /* onglet, swatch couleur */
+  --b-radius-md: 8px; /* défaut : boutons, champs, select, tabs, upload */
+  --b-radius-lg: 32px; /* carte */
+  --b-radius-full: 9999px; /* pastille, interrupteur (totalement arrondi) */
+
+  /* =========================================================
+     4. TYPOGRAPHIE
+     ========================================================= */
+  /* ---- Familles ---- */
+  --b-font-sans:
+    "Cabinet Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --b-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---- Tailles ---- */
+  --b-text-xs: 12px; /* méta, hints, pills, contrôles */
+  --b-text-sm: 14px; /* liens nav, champs, libellés */
+  --b-text-base: 16px; /* corps, CTA, prix /période */
+  --b-text-lg: 18px; /* nom de carte */
+  --b-text-xl: 20px; /* accroche de hero */
+  --b-text-3xl: 36px; /* montant de prix */
+  --b-text-6xl: 72px; /* titre d'affichage hero */
+
+  /* ---- Graisses ---- */
+  --b-font-regular: 400;
+  --b-font-medium: 500;
+  --b-font-semibold: 600;
+  --b-font-bold: 700;
+
+  /* ---- Interlignes ---- */
+  --b-leading-none: 1.02; /* titre d'affichage hero */
+  --b-leading-tight: 1.2; /* boutons */
+  --b-leading-snug: 1.333; /* pastille */
+  --b-leading-normal: 1.4; /* champs, hints */
+  --b-leading-relaxed: 1.5; /* corps muté, descriptions, crédits */
+
+  /* ---- Interlettrage ---- */
+  --b-tracking-tight: -0.01em; /* marque / titre de header */
+  --b-tracking-tighter: -0.03em; /* titre de hero */
+  --b-tracking-wide: 0.08em; /* libellé capitales d'éditeur */
+
+  /* =========================================================
+     5. OMBRES & FOCUS  (recettes composites)
+     ========================================================= */
+  /* Pas d'ombre sur les boutons (.cta / .btn-secondary / .btn-tiertary),
+     dans aucun état — 0 shadow, y compris le halo CTA et le ring
+     secondaire/tertiaire d'origine. Différenciation hover/active uniquement
+     via la couleur de fond / le texte, jamais via shadow. */
+
+  /* Carte surélevée — onglet actif */
+  --b-shadow-raised: 0 1px 2px #0000000a;
+
+  /* Interrupteur */
+  --b-shadow-switch-track: inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  --b-shadow-switch-thumb: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  /* Focus — anneau doux (champs : select, slider) ; standardisé à 3px */
+  --b-shadow-focus: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* Focus — contour dur (boutons, liens, swatch) */
+  --b-focus-outline: 2px solid var(--b-black);
+  --b-focus-offset: 2px;
+
+  /* =========================================================
+     6. MOUVEMENT
+     ========================================================= */
+  --b-ease: cubic-bezier(0.16, 1, 0.3, 1); /* easing signature */
+  --b-ease-default: cubic-bezier(
+    0.4,
+    0,
+    0.2,
+    1
+  ); /* easing par défaut — remplace le mot-clé `ease` */
+  --b-duration-instant: 0.05s; /* press / transform */
+  --b-duration-fast: 0.12s;
+  --b-duration: 0.15s;
+  --b-duration-slow: 0.2s;
+}
+
+/* =============================================================
+   Base globale — appliquée sur tous mes sites
+   (token.css étant chargé partout, ces règles s'appliquent d'office)
+   ============================================================= */
+
+::selection {
+  background: var(--b-accent-20);
+}
+
+/* Barres de défilement — apparence unifiée sur TOUTE zone scrollable
+   (page entière, sections, panneaux…). Propriétés standard (Firefox,
+   Chromium 121+) sur toute scroll-zone + équivalent WebKit pour Safari. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--b-scrollbar-thumb) transparent;
+  overscroll-behavior: contain;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--b-scrollbar-thumb);
+  border-radius: var(--b-radius-full);
 }

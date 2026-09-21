@@ -34,7 +34,7 @@
       aria-label="Billel"
     >Billel</a>
     <div class="app-header__actions">
-      <button id="resetBtn" class="btn btn--quaternary btn--sm" type="button">Tout vider</button>
+      <button id="resetBtn" class="btn btn-ghost" type="button">Tout vider</button>
     </div>
   </header>
 
@@ -54,7 +54,7 @@
         <input type="file" id="fileInput" class="dropzone__input" />
         <div class="dropzone__inner">
           <span class="dropzone__title">Dépose un fichier ici</span>
-          <label for="fileInput" class="btn btn--tertiary btn--sm">Choisir un fichier</label>
+          <label for="fileInput" class="btn btn-tiertary">Choisir un fichier</label>
         </div>
       </div>
 
@@ -65,10 +65,10 @@
             <span class="file-view__size" id="fileSize">—</span>
           </div>
           <div class="file-view__actions">
-            <button class="btn btn--quaternary btn--sm" type="button" id="dumpFormat">Reformater</button>
-            <button class="btn btn--quaternary btn--sm" type="button" id="dumpCopy">Copier hex</button>
-            <button class="btn btn--quaternary btn--sm" type="button" id="dumpDownload">Télécharger</button>
-            <button class="btn btn--quaternary btn--sm" type="button" id="dumpClear">Vider</button>
+            <button class="btn btn-ghost" type="button" id="dumpFormat">Reformater</button>
+            <button class="btn btn-ghost" type="button" id="dumpCopy">Copier hex</button>
+            <button class="btn btn-ghost" type="button" id="dumpDownload">Télécharger</button>
+            <button class="btn btn-ghost" type="button" id="dumpClear">Vider</button>
           </div>
         </div>
 
@@ -83,9 +83,9 @@
         ></textarea>
 
         <div class="file-view__pager" id="filePager" hidden>
-          <button class="btn-link" type="button" id="pagerPrev">←</button>
+          <button class="btn btn-ghost" type="button" id="pagerPrev">←</button>
           <span class="file-view__pager-status" id="pagerStatus">—</span>
-          <button class="btn-link" type="button" id="pagerNext">→</button>
+          <button class="btn btn-ghost" type="button" id="pagerNext">→</button>
         </div>
       </div>
     </section>
@@ -100,44 +100,50 @@
       <div class="converter">
         <div class="converter__field">
           <label class="converter__label" for="hexInput">Hex · base 16</label>
-          <div class="field--inline">
-            <span class="converter__prefix">0x</span>
-            <input id="hexInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="16" />
-            <button class="field--inline__action" type="button" data-copy="hexInput">Copier</button>
+          <div class="field-inline">
+            <div class="converter__control">
+              <span class="converter__prefix">0x</span>
+              <input id="hexInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="16" />
+            </div>
+            <button class="btn btn-ghost" type="button" data-copy="hexInput">Copier</button>
           </div>
         </div>
 
         <div class="converter__field">
           <label class="converter__label" for="decInput">Décimal · base 10</label>
-          <div class="field--inline">
+          <div class="field-inline">
             <input id="decInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="10" />
-            <button class="field--inline__action" type="button" data-copy="decInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="decInput">Copier</button>
           </div>
         </div>
 
         <div class="converter__field">
           <label class="converter__label" for="octInput">Octal · base 8</label>
-          <div class="field--inline">
-            <span class="converter__prefix">0o</span>
-            <input id="octInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="8" />
-            <button class="field--inline__action" type="button" data-copy="octInput">Copier</button>
+          <div class="field-inline">
+            <div class="converter__control">
+              <span class="converter__prefix">0o</span>
+              <input id="octInput" class="input converter__input" type="text" spellcheck="false" autocomplete="off" data-base="8" />
+            </div>
+            <button class="btn btn-ghost" type="button" data-copy="octInput">Copier</button>
           </div>
         </div>
 
         <div class="converter__field">
           <label class="converter__label" for="binInput">Binaire · base 2</label>
-          <div class="field--inline">
-            <span class="converter__prefix">0b</span>
-            <input id="binInput" class="input converter__input converter__input--mono" type="text" spellcheck="false" autocomplete="off" data-base="2" />
-            <button class="field--inline__action" type="button" data-copy="binInput">Copier</button>
+          <div class="field-inline">
+            <div class="converter__control">
+              <span class="converter__prefix">0b</span>
+              <input id="binInput" class="input converter__input converter__input--mono" type="text" spellcheck="false" autocomplete="off" data-base="2" />
+            </div>
+            <button class="btn btn-ghost" type="button" data-copy="binInput">Copier</button>
           </div>
         </div>
 
         <div class="converter__field">
           <label class="converter__label" for="textInput">Texte · UTF-8</label>
-          <div class="field--inline">
+          <div class="field-inline">
             <input id="textInput" class="input converter__input--text" type="text" spellcheck="false" autocomplete="off" />
-            <button class="field--inline__action" type="button" data-copy="textInput">Copier</button>
+            <button class="btn btn-ghost" type="button" data-copy="textInput">Copier</button>
           </div>
         </div>
 

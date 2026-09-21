@@ -1,31 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <!-- Background -->
-  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect width="1200" height="630" fill="#fff9f5"/>
 
-  <!-- Subtle paper band at bottom -->
-  <rect x="0" y="500" width="1200" height="130" fill="#f5f5f5"/>
+  <!-- Subtle surface band at bottom -->
+  <rect x="0" y="500" width="1200" height="130" fill="#f1edeb"/>
 
   <!-- Top: brand wordmark -->
   <text
     x="80"
     y="100"
-    font-family="Georgia, 'Times New Roman', serif"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
     font-size="28"
-    font-weight="500"
-    fill="#1e1b22"
+    font-weight="700"
+    fill="#120f0d"
   >Billel</text>
 
   <!-- Pill "Outil" -->
   <g transform="translate(80, 140)">
-    <rect width="84" height="32" rx="16" fill="#1e1b22"/>
+    <rect width="84" height="32" rx="16" fill="#120f0d"/>
     <text
       x="42"
       y="22"
       text-anchor="middle"
-      font-family="system-ui, -apple-system, sans-serif"
+      font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
       font-size="14"
       font-weight="600"
-      fill="#ffffff"
+      fill="#fff9f5"
     >Outil</text>
   </g>
 
@@ -33,40 +33,41 @@
   <text
     x="80"
     y="290"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="104"
-    font-weight="500"
-    fill="#1e1b22"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="100"
+    font-weight="700"
+    letter-spacing="-3"
+    fill="#120f0d"
   >Hexadecimal</text>
   <text
     x="80"
     y="400"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="104"
-    font-weight="500"
-    font-style="italic"
-    fill="#1e1b22"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="100"
+    font-weight="700"
+    letter-spacing="-3"
+    fill="#120f0d"
   >converter<tspan fill="#f06800">.</tspan></text>
 
   <!-- Hex strip preview at bottom -->
-  <g font-family="ui-monospace, Menlo, Monaco, monospace" font-size="20" fill="#423e46" letter-spacing="2">
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" fill="#3b3735" letter-spacing="2">
     <text x="80" y="550">00000000</text>
     <text x="220" y="550">48 65 6c 6c 6f 20 42 69 6c 6c 65 6c 21</text>
     <text x="700" y="550">Hello Billel!</text>
   </g>
-  <g font-family="ui-monospace, Menlo, Monaco, monospace" font-size="20" fill="#aaa9b2" letter-spacing="2">
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" fill="#dcd5d0" letter-spacing="2">
     <text x="80" y="590">00000010</text>
-    <text x="220" y="590">f0 68 00 · 68 00 f0 · 1e 1b 22</text>
+    <text x="220" y="590">f0 68 00 · 68 00 f0 · 12 0f 0d</text>
   </g>
 
   <!-- Right-side accent: hex grid -->
-  <g opacity="0.9" font-family="ui-monospace, Menlo, Monaco, monospace" font-size="32" font-weight="600">
+  <g opacity="0.9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="32" font-weight="600">
     <text x="930" y="220" fill="#f06800">0x</text>
-    <text x="1000" y="220" fill="#1e1b22">FF</text>
-    <text x="930" y="280" fill="#6800f0">0b</text>
-    <text x="1000" y="280" fill="#1e1b22">11</text>
-    <text x="930" y="340" fill="#aaa9b2">0o</text>
-    <text x="1000" y="340" fill="#1e1b22">77</text>
+    <text x="1000" y="220" fill="#120f0d">FF</text>
+    <text x="930" y="280" fill="#f04000">0b</text>
+    <text x="1000" y="280" fill="#120f0d">11</text>
+    <text x="930" y="340" fill="#93857d">0o</text>
+    <text x="1000" y="340" fill="#120f0d">77</text>
   </g>
 
   <!-- Domain bottom-right -->
@@ -74,8 +75,8 @@
     x="1120"
     y="100"
     text-anchor="end"
-    font-family="ui-monospace, Menlo, Monaco, monospace"
+    font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
     font-size="16"
-    fill="#aaa9b2"
+    fill="#93857d"
   >billeltighidet.fr</text>
 </svg>
