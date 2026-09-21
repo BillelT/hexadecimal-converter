@@ -19,7 +19,11 @@
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
-  line-height: var(--b-leading-tight);
+  /* line-height: 1 plutôt que --b-leading-tight — avec un padding vertical
+     serré (.btn-ghost), la demi-fonte au-dessus/en dessous du texte n'est
+     pas symétrique dans cette pile de polices et pousse le texte visible
+     vers le haut de la boîte malgré align-items: center. */
+  line-height: 1;
   transition:
     background-color var(--b-duration) var(--b-ease-default),
     color var(--b-duration-fast) var(--b-ease-default),

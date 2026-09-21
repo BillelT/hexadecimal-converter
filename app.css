@@ -13,7 +13,7 @@
   display: none !important;
 }
 
-h1, h2, p {
+body, h1, h2, p {
   margin: 0;
 }
 
@@ -150,10 +150,12 @@ body {
   color: var(--b-text-muted);
 }
 
-/* Contrôle + bouton adjacent sur une ligne (pattern .field-inline b-form) */
+/* Contrôle + bouton adjacent sur une ligne (pattern .field-inline b-form).
+   align-items: center — pas stretch — pour que le bouton ghost garde sa
+   hauteur compacte plutôt que de s'étirer à la hauteur du champ. */
 .field-inline {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: var(--b-space-8);
 }
 
@@ -321,10 +323,15 @@ body {
   color: var(--b-text-muted);
 }
 
-/* ---------- Footer — pas de fond, juste la bordure haute ------------------ */
+/* ---------- Footer — pas de fond, bordure haute full-bleed ---------------- */
 
 .page-foot {
   flex: 0 0 auto;
+  width: 100%;
+  border-top: 1px solid var(--b-border);
+}
+
+.page-foot__inner {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
@@ -333,7 +340,6 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: var(--b-space-16);
-  border-top: 1px solid var(--b-border);
   font-size: var(--b-text-xs);
   color: var(--b-text-faint);
 }
@@ -364,7 +370,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .page-foot {
+  .page-foot__inner {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--b-space-8);
